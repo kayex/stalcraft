@@ -68,9 +68,9 @@ func WithHTTPClient(client *http.Client) func(*Client) {
 	}
 }
 
-func WithDemoDomain() func(*Client) {
+func WithDomain(domain string) func(*Client) {
 	return func(c *Client) {
-		c.domain = DemoDomain
+		c.domain = domain
 	}
 }
 
