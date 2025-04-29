@@ -8,13 +8,6 @@ import (
 	"time"
 )
 
-const (
-	RegionNA  = "NA"
-	RegionEU  = "EU"
-	RegionSEA = "SEA"
-	RegionRU  = "RU"
-)
-
 type Lot struct {
 	ItemID       string         `json:"itemId"`
 	Amount       int            `json:"amount"`
