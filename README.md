@@ -1,6 +1,6 @@
 # Stalcraft: X API Client
 
-Go API client for the [Stalcraft: X API](https://eapi.stalcraft.net/overview.html).
+Go client for the [Stalcraft: X API](https://eapi.stalcraft.net/overview.html).
 
 ## Installation
 `go get -u github.com/kayex/stalcraft`
