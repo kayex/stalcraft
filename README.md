@@ -41,7 +41,7 @@ func main() {
 ```
 
 ### Endpoints
-All available endpoints are found in `endpoints.go`. Their names match the names in the [API reference](https://eapi.stalcraft.net/reference#/) as closely as possible.
+All available endpoints are found in [endpoints.go](https://github.com/kayex/stalcraft/tree/main/endpoints.go). Their names match the names in the [API reference](https://eapi.stalcraft.net/reference#/) as closely as possible.
 
 ## License
 MIT
