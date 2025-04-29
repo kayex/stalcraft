@@ -165,7 +165,7 @@ func roundtrip[R any](ctx context.Context, c *Client, path string) (R, error) {
 	for {
 		res, err := do[R](c.client, req)
 		if err != nil {
-			var erl *ErrRateLimited
+			var erl *RateLimitError
 			if errors.As(err, &erl) {
 				next := time.UnixMilli(erl.Reset).Sub(time.Now())
 				<-time.After(next)
@@ -198,7 +198,7 @@ func do[R any](c *http.Client, r *http.Request) (R, error) {
 			if err != nil {
 				return *new(R), fmt.Errorf("parsing X-Ratelimit-Reset header: %v", err)
 			}
-			return *new(R), &ErrRateLimited{
+			return *new(R), &RateLimitError{
 				Limit:     limit,
 				Remaining: remaining,
 				Reset:     int64(reset),
@@ -246,12 +246,12 @@ func (e *Err) Error() string {
 	return msg
 }
 
-type ErrRateLimited struct {
+type RateLimitError struct {
 	Limit     int
 	Remaining int
 	Reset     int64
 }
 
-func (e *ErrRateLimited) Error() string {
+func (e *RateLimitError) Error() string {
 	return fmt.Sprintf("rate limit reached, limit %d, remaining %d, reset %d", e.Limit, e.Remaining, e.Reset)
 }
