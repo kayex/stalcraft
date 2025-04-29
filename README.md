@@ -13,25 +13,35 @@ The official [demo API](https://eapi.stalcraft.net/overview.html#demo-api) can b
 access it by passing either of `stalcraft.DemoAppAccessToken` or `stalcraft.DemoUserAccessToken` along with
 `stalcraft.WithDomain(stalcraft.DemoDomain)` to the client constructor.
 
-### Basic client initialization
+### Basic example
+
 ```go
 package main
 
 import (
-    "log"
-    "github.com/kayex/stalcraft"
+	"context"
+	"fmt"
+	"log"
+	"github.com/kayex/stalcraft"
 )
 
 func main() {
-    client, err := stalcraft.NewClient(stalcraft.RegionEU, "your-access-token")
-    if err != nil {
-        log.Fatal(err)
-    }
+	client, err := stalcraft.NewClient(stalcraft.RegionEU, "your-access-token")
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	emission, err := client.EmissionStatus(context.Background())
+	if err != nil {
+		log.Fatal(err)
+	}
+    
+ 	fmt.Printf("Current emission start time: %v\n", emission.CurrentStart)
 }
 ```
 
 ### Endpoints
-The available endpoints are found in `endpoints.go`. Their names match the names in the [API reference](https://eapi.stalcraft.net/reference#/) to the extent possible.
+All available endpoints are found in `endpoints.go`. Their names match the names in the [API reference](https://eapi.stalcraft.net/reference#/) as closely as possible.
 
 ## License
 MIT
