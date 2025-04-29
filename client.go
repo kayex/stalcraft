@@ -41,10 +41,10 @@ func NewClient(region, accessToken string, opt ...ClientOption) (*Client, error)
 		o(c)
 	}
 	if c.region == "" {
-		return nil, fmt.Errorf("no region provided")
+		return nil, errors.New("no region provided")
 	}
 	if c.accessToken == "" {
-		return nil, fmt.Errorf("no access token provided")
+		return nil, errors.New("no access token provided")
 	}
 	if c.client == nil {
 		c.client = http.DefaultClient
@@ -142,7 +142,7 @@ func (c *Client) ClanInformation(ctx context.Context, region, clanID string) (*C
 }
 
 // ClanMembers returns list of members in the given clan. Requires user authentication.
-// Can be used only when authenticated user has at least one character in the clan.
+// Can only be used when authenticated user has at least one character in the clan.
 //
 // https://eapi.stalcraft.net/reference#/paths/region--clan--clan-id--members/get
 func (c *Client) ClanMembers(ctx context.Context, region, clanID string) ([]ClanMember, error) {
